@@ -56,7 +56,10 @@ public class Factory {
         }
         else{
             for (int i = 0; i < MAX_EMPLOYEES; i++){
-                employees[i] = new Administrator(name, id, salary);
+                if (employees[i] == null){
+                    employees[i] = new Administrator(name, id, salary);
+                    break;
+                }
             }
         }
     }
@@ -68,12 +71,16 @@ public class Factory {
      */
     public void updateHours(int[] hours, int month){
         for (int i = 0; i < MAX_EMPLOYEES; i++){
+            if (employees[i] == null)
+                continue;
             employees[i].setWorkingHours(month, hours[i]);
         }
     }
 
     public void printSalaries(int month){
         for (int i = 0; i < MAX_EMPLOYEES; i++){
+            if (employees[i] == null)
+                continue;
             System.out.println(employees[i].getName() + ", " + employees[i].computeSalary(month));
         }
     }
